@@ -5,4 +5,4 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html', title='ORF 401: Assignment #1 - Python')
+    return render_template('index.html', title='ORF 401: Assignment 1 - Python')
