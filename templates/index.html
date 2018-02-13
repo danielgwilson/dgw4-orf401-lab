@@ -8,16 +8,18 @@
 <div class="container">
         <div class="row">
                 <div class="col s12 m6">
-                    <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
-                    <br>
-                    <h3>riidr carsharing service</h3>
-                    <br>
-                    <p>Enter a single origin/destination to search for:</p>
+                    <div class="card card-1">
+                        <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
+                        <br>
+                        <h3>riidr carsharing service</h3>
+                        <br>
+                        <p>Enter a single origin/destination to search for:</p>
 
-                    <form method="get">
-                        <input type="text" name="query"/>
-                        <input type="submit"/>
-                    </form>
+                        <form method="get">
+                            <input type="text" name="query"/>
+                            {{ util.form_button("Search", type='submit', name='action')}}
+                        </form>
+                    </div>
             	</div>
         </div>
 </div>
