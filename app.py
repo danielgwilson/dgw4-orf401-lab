@@ -7,8 +7,9 @@ def hello_world():
         <html>
             <title>ORF 401: Assignment #1 - Python - Spring 2018</title>
             <body>
+                <center>
                 <br><br>
-                <h1 style="center">riidr carsharing service</h1>
+                <h1>riidr carsharing service</h1>
                 <br><br>
                 <img src="riidr_logo.png"/>
                 <br><br>
@@ -19,6 +20,7 @@ def hello_world():
                     <input type="text" name="query"/>
                     <input type="submit"/>
                 </form>
+                </center>
             </body>
         </html>
     '''
