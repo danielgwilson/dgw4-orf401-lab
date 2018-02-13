@@ -1,19 +1,25 @@
-<html>
-    <title>{{ title }} - Spring 2018</title>
-    <body>
-        <center>
-        <br><br>
-        <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
-        <br><br>
-        <h1>riidr carsharing service</h1>
-        <br><br>
+{% extends "material/base.html" %}
+{% import "material/utils.html" as util %}
+{% import "material/wtf.html" as wtf %}
 
-        <p>Enter a single origin/destination to search for:</p>
+{% block title %}{{ title }} - Spring 2018{% endblock %}
 
-        <form method="get">
-            <input type="text" name="query"/>
-            <input type="submit"/>
-        </form>
-        </center>
-    </body>
-</html>
+{% block content %}
+<div class="container">
+        <div class="row">
+                <div class="col s12 m6">
+                    <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
+                </div>
+                <div class="col s12 m6">
+                    <h1>riidr carsharing service</h1>
+                    <br><br>
+                    <p>Enter a single origin/destination to search for:</p>
+
+                    <form method="get">
+                        <input type="text" name="query"/>
+                        <input type="submit"/>
+                    </form>
+            	</div>
+        </div>
+</div>
+{% endblock %}
