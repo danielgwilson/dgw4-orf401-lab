@@ -8,14 +8,21 @@
 <div class="container">
         <div class="row">
                 <div class="col s12 m6">
-                    <div class="card card-1">
-                        <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
-                        <br>
-                        <h3>riidr carsharing service</h3>
-                        <br>
-                        <p>Enter a single origin/destination to search for:</p>
-                        wtf.quick_form(form)
-                    </div>
+                    <img src="{{url_for('static', filename='riidr_logo.png')}}"/>
+                    <br>
+                    <h3>riidr carsharing service</h3>
+                    <br>
+                    <p>Enter a single origin/destination to search for:</p>
+                    <form action="/" method="get">
+                        {{ form.search }}
+                        {{ util.form_button('Submit', type='submit', name='') }}
+                    </form>
+                    {% if results %}
+                        {% for result in results %}
+                            {{ result }}
+                            <br>
+                        {% endfor %}
+                    {% endif %}
             	</div>
         </div>
 </div>
