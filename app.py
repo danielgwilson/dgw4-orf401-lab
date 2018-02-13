@@ -8,7 +8,9 @@ Material(app)
 
 class ExampleForm(Form):
     field1 = TextField('Search Field', description='Enter an origin or a destination')
+    submit_button = SubmitField('Submit Form')
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html', title='ORF 401: Lab 1 - Python')
+    form = ExampleForm()
+    return render_template('index.html', title='ORF 401: Lab 1 - Python', form = form)
