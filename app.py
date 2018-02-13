@@ -1,6 +1,11 @@
 from flask import Flask
 from flask import render_template
-app = Flask(__name__)
+import os
+
+project_root = os.path.dirname(__file__)
+template_path = os.path.join(project_root, './templates/')
+
+app = Flask(__name__, template_folder=template_path)
 
 @app.route('/')
 def hello_world():
