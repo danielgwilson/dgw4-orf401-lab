@@ -23,19 +23,8 @@ def search_dat(file_name, search_term):
 
     file = pd.read_csv(file_name)
 
-    for row in file[file['City'].str.contains(search_term)].values.tolist():
+    for row in file[file['City'].str.contains(search_term, case=False)].values.tolist():
         rides.append(' '.join(str(s) for s in row))
-
-    # print(rides)
-    # with open(file_name, "r") as file:
-    #     reader = csv.reader(file)
-    #     for row in reader:
-    #         name, source, dest, date, time, multiple, num = line.split(
-    #             "\t")
-    #
-    #         if search_term in source or search_term in dest:
-    #             rides.append(name + " " + source + " " + dest + " " + date + \
-    #                 " " + time + " " + multiple + " " + num)
 
     return rides
 
