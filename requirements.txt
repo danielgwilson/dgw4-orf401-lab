@@ -2,3 +2,4 @@ Flask
 gunicorn
 flask-material
 flask-wtf
+pandas
