@@ -20,8 +20,9 @@ def search_dat(file_name, search_term):
 
     df = pd.read_csv(file_name)
     return df[df['Address'].str.contains(search_term, case=False) |
-                df['City'].str.contains(search_term, case=False) |
-                df['State'].str.contains(search_term, case=False)].values.tolist()
+              df['City'].str.contains(search_term, case=False) |
+              df['State'].str.contains(search_term, case=False)].values.tolist()
+
 
 def get_top_origins(file_name):
     df = pd.read_csv(file_name)
@@ -31,7 +32,7 @@ def get_top_origins(file_name):
 @app.route('/')
 def index():
     data_file_name = 'met_gala_attendees.csv'
-    form = ExampleForm(csrf_enabled = False)
+    form = ExampleForm(csrf_enabled=False)
 
     # if there was a query entered, build a table
     query = ''
@@ -45,11 +46,11 @@ def index():
     chips = get_top_origins(data_file_name)
 
     return render_template('index_mdl.html',
-                            title='ORF 401: Lab 1 - Python',
-                            form=form,
-                            query=query,
-                            results=results,
-                            chips=chips)
+                           title='ORF 401: Lab 1 - Python',
+                           form=form,
+                           query=query,
+                           results=results,
+                           chips=chips)
 
 
 if __name__ == '__main__':
