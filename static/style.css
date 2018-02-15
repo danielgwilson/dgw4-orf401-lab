@@ -1,0 +1,40 @@
+.body {
+    background-color: #b5cfcc;
+}
+
+.a {
+    color: None;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.mdl-grid.center-items {
+    justify-content: center;
+}
+
+.interface {
+    margin-top: 1em;
+}
+
+.results {
+    margin-top: 4em;
+}
+
+.main-logo {
+    width: 10em;
+}
+
+.destination-card-wide.mdl-card {
+    width: 70%;
+    margin-bottom: 2em;
+}
+
+.destination-card-wide>.mdl-card__title {
+    color: #fff;
+    height: 210px;
+    background: url('oscars_card.jpg') center / cover;
+}
+
+.search-form {}
