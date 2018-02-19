@@ -5,6 +5,7 @@ from wtforms import TextField, SubmitField
 from wtforms.validators import Required
 import sys
 import pandas as pd
+from config import Config
 
 app = Flask(__name__)
 Material(app)

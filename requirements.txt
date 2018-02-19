@@ -3,3 +3,4 @@ gunicorn
 flask-material
 flask-wtf
 pandas
+flask-sqlalchemy
