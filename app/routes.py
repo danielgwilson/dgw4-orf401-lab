@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request
+from app import app
+
+from flask import render_template, request
 from flask_material import Material
 from flask_wtf import Form
 from wtforms import TextField, SubmitField
 from wtforms.validators import Required
 import sys
 import pandas as pd
-from config import Config
 
-app = Flask(__name__)
 Material(app)
 
 
@@ -32,7 +32,7 @@ def get_top_origins(file_name):
 
 @app.route('/')
 def index():
-    data_file_name = 'met_gala_attendees.csv'
+    data_file_name = 'app/met_gala_attendees.csv'
     form = ExampleForm(csrf_enabled=False)
 
     # if there was a query entered, build a table
@@ -52,7 +52,3 @@ def index():
                            query=query,
                            results=results,
                            chips=chips)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
