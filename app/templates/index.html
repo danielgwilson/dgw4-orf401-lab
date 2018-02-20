@@ -12,23 +12,23 @@
                         </a>
                         <h2 class="mdl-card__title-text">riidr carsharing service</h2>
                         <div class="mdl-layout-spacer"></div>
-                        <form class="login-button-form" action="{{ url_for('login') }}">
-                            <button id="login-button" type="submit" class="login-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                                <i class="material-icons">account_circle</i>
-                            </button>
-                        </form>
+                        {% if current_user.is_anonymous %}
+                            <form class="login-button-form" action="{{ url_for('login') }}">
+                                <button id="login-button" type="submit" class="login-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                    <i class="material-icons">account_circle</i>
+                                </button>
+                            </form>
+                        {% else %}
+                            <form class="login-button-form" action="{{ url_for('logout') }}">
+                                <button id="login-button" type="submit" class="login-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                    <i class="material-icons">eject</i>
+                                </button>
+                            </form>
+                        {% endif %}
                     </div>
 
                     <div class="mdl-card__supporting-text">
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                            <ul>
-                                {% for message in messages %}
-                                <li>{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                        {% endwith %}
+                        <h4>Hi, {{ current_user.username }}!</h4>
                         <form class="search-form" action="/" method="get">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {{ form.search(class="mdl-textfield__input", value=query) }}
@@ -54,7 +54,11 @@
                     </div>
                 </div>
                 <div class="mdl-tooltip" data-mdl-for="login-button">
-                    Login
+                    {% if current_user.is_anonymous %}
+                        Login
+                    {% else %}
+                        Logout
+                    {% endif %}
                 </div>
                 <div class="mdl-tooltip" data-mdl-for="chips">
                     Common Origins
