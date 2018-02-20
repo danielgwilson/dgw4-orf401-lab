@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="mdl-grid center-items">
+        <div class="mdl-cell mdl-cell--4-col center-items">
+            <div class="interface">
+                <div class="search-card mdl-card mdl-shadow--2dp full-width">
+                    <div class="mdl-card__title">
+                        <a href="/">
+                            <img class="main-logo" src="{{url_for('static', filename='riidr_logo.png')}}"/>
+                        </a>
+                        <h2 class="mdl-card__title-text">riidr carsharing service</h2>
+                        <div class="mdl-layout-spacer"></div>
+                        <form class="login-button-form" action="/login">
+                            <button id="login-button" type="submit" class="login-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                <i class="material-icons">account_circle</i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="mdl-card__supporting-text">
+                        <form class="search-form" action="/" method="get">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ form.search(class="mdl-textfield__input", value=query) }}
+                                <label class="mdl-textfield__label">
+                                    Enter an origin city
+                                </label>
+                            </div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                Search
+                            </button>
+                        </form>
+                        <br> {% if chips %}
+                        <div id="chips">
+                            {% for chip in chips %}
+                            <a href="/?search={{ chip }}">
+                                <span class="mdl-chip">
+                                    <span class="mdl-chip__text">{{ chip }}</span>
+                                </span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mdl-tooltip" data-mdl-for="login-button">
+                    Login
+                </div>
+                <div class="mdl-tooltip" data-mdl-for="chips">
+                    Common Origins
+                </div>
+
+                <div class="results">
+                    {% if results %}
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric full-width">Last</th>
+                                <th class="mdl-data-table__cell--non-numeric full-width">First</th>
+                                <th class="mdl-data-table__cell--non-numeric full-width">Address</th>
+                                <th class="mdl-data-table__cell--non-numeric full-width">City</th>
+                                <th class="mdl-data-table__cell--non-numeric full-width">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                            <tr>
+                                {% for item in result %}
+                                <td class="mdl-data-table__cell--non-numeric">{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="destination-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Traveling to The Oscars 2018</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            riidr.io is pleased to serve as Hollywood's preferred ride sharing service for attendees of The Oscars!
+                            <br><br>
+                            <i>The Oscars will take place at the Dolby Theater - 6801 Hollywood Blvd, Hollywood, CA 90028.</i>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

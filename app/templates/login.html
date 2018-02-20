@@ -1,0 +1,68 @@
+<!---From https://codemyui.com/material-design-register-login-form/--->
+{% extends "base.html" %}
+
+{% block head %}
+<!-- Login form popup from https://codemyui.com/material-design-register-login-form/ -->
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='login.css') }}">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="materialContainer">
+
+
+    <div class="box">
+
+        <div class="title">LOGIN</div>
+
+        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" name="name" id="name">
+            <label class="mdl-textfield__label" for="name">Username</label>
+        </div>
+
+        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" name="pass" id="pass">
+            <label class="mdl-textfield__label" for="pass">Password</label>
+        </div>
+
+        <div class="button login">
+            <button><span>GO</span> <i class="fa fa-check"></i></button>
+        </div>
+
+        <a href="" class="pass-forgot">Forgot your password?</a>
+
+    </div>
+
+    <div class="overbox">
+        <div class="material-button alt-2"><span class="shape"></span></div>
+
+        <div class="title">LOGIN</div>
+
+        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="regname">Username</label>
+            <input class="mdl-textfield__input" type="text" name="regname" id="regname">
+        </div>
+
+        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="regpass">Password</label>
+            <input class="mdl-textfield__input" type="password" name="regpass" id="regpass">
+        </div>
+
+        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="reregpass">Repeat Password</label>
+            <input class="mdl-textfield__input" type="password" name="reregpass" id="reregpass">
+        </div>
+
+        <div class="button">
+            <button><span>NEXT</span></button>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script type="text/javascript" href="{{ url_for('static', filename='login.js') }}"></script>
+{% endblock %}

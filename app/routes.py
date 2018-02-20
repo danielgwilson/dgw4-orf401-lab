@@ -46,9 +46,14 @@ def index():
     # make chips out of the top 4 cities
     chips = get_top_origins(data_file_name)
 
-    return render_template('index_mdl.html',
-                           title='ORF 401: Lab 1 - Python',
+    return render_template('index.html',
+                           title='ORF 401: Lab 2',
                            form=form,
                            query=query,
                            results=results,
                            chips=chips)
+
+@app.route('/login')
+def login():
+    return render_template('login.html',
+                            title = 'ORF 401: Lab 2 - Login')
