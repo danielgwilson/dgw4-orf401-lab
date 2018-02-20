@@ -1,68 +1,72 @@
-<!---From https://codemyui.com/material-design-register-login-form/--->
 {% extends "base.html" %}
 
 {% block head %}
-<!-- Login form popup from https://codemyui.com/material-design-register-login-form/ -->
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='login.css') }}">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-<link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext" rel="stylesheet" />
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="materialContainer">
+<div class="container">
+    <div class="mdl-grid center-items">
+        <div class="mdl-cell mdl-cell--2-col center-items">
+            <div class="interface">
+                <div class="search-card mdl-card mdl-shadow--2dp full-width">
+                    <div class="mdl-card__title">
+                        <a href="/">
+                            <img class="main-logo" src="{{url_for('static', filename='riidr_logo.png')}}"/>
+                        </a>
+                        <div class="mdl-layout-spacer"></div>
+                        <form class="back-button-form" action="{{ url_for('index') }}">
+                            <button id="back-button" type="submit" class="back-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                <i class="material-icons">arrow_back</i>
+                            </button>
+                        </form>
+                    </div>
 
-
-    <div class="box">
-
-        <div class="title">LOGIN</div>
-
-        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" name="name" id="name">
-            <label class="mdl-textfield__label" for="name">Username</label>
+                    <form class="login-form search-form" action="" method="post">
+                        {{ form.hidden_tag() }}
+                        <div class="mdl-card__supporting-text">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ form.username(class="mdl-textfield__input") }}
+                                <label class="mdl-textfield__label">
+                                    {{ form.username.label }}
+                                </label>
+                            </div>
+                            {% for error in form.username.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ form.password(class="mdl-textfield__input") }}
+                                <label class="mdl-textfield__label">
+                                    {{ form.password.label }}
+                                </label>
+                            </div>
+                            {% for error in form.password.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                                {{ form.remember_me(class="mdl-switch__input") }}
+                                <span class="mdl-switch__label">
+                                    {{ form.remember_me.label }}
+                                </span>
+                            </label>
+                            <div class="mdl-card__actions mdl-card--border">
+                                {{ form.submit(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent") }}
+                                <!-- <div class="mdl-layout-spacer"></div> -->
+                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="mdl-tooltip" data-mdl-for="login-button">
+                    Login
+                </div>
+                <div class="mdl-tooltip" data-mdl-for="chips">
+                    Common Origins
+                </div>
+            </div>
         </div>
-
-        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" name="pass" id="pass">
-            <label class="mdl-textfield__label" for="pass">Password</label>
-        </div>
-
-        <div class="button login">
-            <button><span>GO</span> <i class="fa fa-check"></i></button>
-        </div>
-
-        <a href="" class="pass-forgot">Forgot your password?</a>
-
     </div>
-
-    <div class="overbox">
-        <div class="material-button alt-2"><span class="shape"></span></div>
-
-        <div class="title">LOGIN</div>
-
-        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label class="mdl-textfield__label" for="regname">Username</label>
-            <input class="mdl-textfield__input" type="text" name="regname" id="regname">
-        </div>
-
-        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label class="mdl-textfield__label" for="regpass">Password</label>
-            <input class="mdl-textfield__input" type="password" name="regpass" id="regpass">
-        </div>
-
-        <div class="input mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label class="mdl-textfield__label" for="reregpass">Repeat Password</label>
-            <input class="mdl-textfield__input" type="password" name="reregpass" id="reregpass">
-        </div>
-
-        <div class="button">
-            <button><span>NEXT</span></button>
-        </div>
-
-
-    </div>
-
 </div>
-
-<script type="text/javascript" href="{{ url_for('static', filename='login.js') }}"></script>
 {% endblock %}

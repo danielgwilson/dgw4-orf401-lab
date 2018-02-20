@@ -7,12 +7,12 @@
             <div class="interface">
                 <div class="search-card mdl-card mdl-shadow--2dp full-width">
                     <div class="mdl-card__title">
-                        <a href="/">
+                        <a href="{{ url_for('index') }}">
                             <img class="main-logo" src="{{url_for('static', filename='riidr_logo.png')}}"/>
                         </a>
                         <h2 class="mdl-card__title-text">riidr carsharing service</h2>
                         <div class="mdl-layout-spacer"></div>
-                        <form class="login-button-form" action="/login">
+                        <form class="login-button-form" action="{{ url_for('login') }}">
                             <button id="login-button" type="submit" class="login-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                                 <i class="material-icons">account_circle</i>
                             </button>
@@ -20,6 +20,15 @@
                     </div>
 
                     <div class="mdl-card__supporting-text">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
                         <form class="search-form" action="/" method="get">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {{ form.search(class="mdl-textfield__input", value=query) }}

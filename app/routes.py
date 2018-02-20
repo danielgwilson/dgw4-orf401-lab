@@ -1,19 +1,12 @@
 from app import app
+from app.forms import LoginForm, SearchForm
 
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
 from flask_material import Material
-from flask_wtf import Form
-from wtforms import TextField, SubmitField
-from wtforms.validators import Required
 import sys
 import pandas as pd
 
 Material(app)
-
-
-class ExampleForm(Form):
-    search = TextField(
-        'Search Field', description='Origin or Destination')
 
 
 def search_dat(file_name, search_term):
@@ -33,7 +26,7 @@ def get_top_origins(file_name):
 @app.route('/')
 def index():
     data_file_name = 'app/met_gala_attendees.csv'
-    form = ExampleForm()
+    form = SearchForm()
 
     # if there was a query entered, build a table
     query = ''
@@ -53,7 +46,13 @@ def index():
                            results=results,
                            chips=chips)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect('/')
     return render_template('login.html',
-                            title = 'ORF 401: Lab 2 - Login')
+                            title = 'ORF 401: Lab 2 - Login',
+                            form = form)
