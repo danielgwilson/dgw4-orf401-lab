@@ -33,7 +33,7 @@ def get_top_origins(file_name):
 @app.route('/')
 def index():
     data_file_name = 'app/met_gala_attendees.csv'
-    form = ExampleForm(csrf_enabled=False)
+    form = ExampleForm()
 
     # if there was a query entered, build a table
     query = ''
