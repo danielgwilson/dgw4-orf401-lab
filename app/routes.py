@@ -9,8 +9,10 @@ from app.models import User
 from flask import render_template, request, flash, redirect, url_for
 from werkzeug.urls import url_parse
 from flask_material import Material
+
 import sys
 import pandas as pd
+import numpy as np
 
 Material(app)
 
@@ -19,9 +21,14 @@ def search_dat(file_name, search_term):
     # search the dataset for a query
 
     df = pd.read_csv(file_name)
-    return df[df['Address'].str.contains(search_term, case=False) |
-              df['City'].str.contains(search_term, case=False) |
-              df['State'].str.contains(search_term, case=False)].values.tolist()
+    # results = df[df['Address'].str.contains(search_term, case=False) |
+    #           df['City'].str.contains(search_term, case=False) |
+    #           df['State'].str.contains(search_term, case=False)].values.tolist()
+
+    # Only search city now since we're looking for people from the same origin City
+    # later this can be converted to closest by GIS location
+    results = df[df['City'].str.contains(search_term, case=False)].sample(n=1).values.tolist()
+    return results
 
 
 def get_top_origins(file_name):
