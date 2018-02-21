@@ -12,7 +12,7 @@ from flask_material import Material
 
 import sys
 import pandas as pd
-import numpy as np
+import random
 
 Material(app)
 
@@ -27,7 +27,22 @@ def search_dat(file_name, search_term):
 
     # Only search city now since we're looking for people from the same origin City
     # later this can be converted to closest by GIS location
-    results = df[df['City'].str.contains(search_term, case=False)].sample(n=1).values.tolist()
+    #results = df[df['City'].str.contains(search_term, case=False)].sample(n=1).values.tolist()
+
+    # Use database rather than csv to search
+    users = User.query.filter_by(pickup_city=search_term).all()
+    user = random.choice(users) # random - change to closest later
+
+    # don't return the current user
+    while user.username == current_user.username and len(users) > 1:
+        user = random.choice(users)
+
+    if user.username == current_user.username:
+        results = None
+    else:
+        results = [[user.last_name, user.first_name, user.pickup_address, user.pickup_city, user.pickup_state]]
+    print(user.username)
+
     return results
 
 
@@ -47,6 +62,12 @@ def index():
     if request.args:
         if request.args['search'] != '':
             query = request.args['search']
+
+            # set user city to most recent search
+            current_user.set_pickup_city(query)
+            db.session.commit()
+
+            # search database for someone with the same city
             results = search_dat(data_file_name, query)
 
     # make chips out of the top 4 cities
@@ -101,7 +122,10 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         print('test2')
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data,
+                    email=form.email.data,
+                    first_name=form.first_name.data,
+                    last_name=form.last_name.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

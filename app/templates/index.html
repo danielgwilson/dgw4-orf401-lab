@@ -31,7 +31,7 @@
                         {% if current_user.is_anonymous %}
                             <h4>Hi there! To search for a ride, please login or create an account.</h4>
                         {% else %}
-                            <h4>Hi, {{ current_user.username }}! Where would you like to be picked up?</h4>
+                            <h4>Hi, {{ current_user.first_name }}! Where would you like to be picked up?</h4>
 
                             {% with messages = get_flashed_messages() %}
                             {% if messages %}
