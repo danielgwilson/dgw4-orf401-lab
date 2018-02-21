@@ -8,6 +8,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    pickup_address = db.Column(db.String(120), index=True, unique=False)
+    pickup_city = db.Column(db.String(120), index=True, unique=False)
+    pickup_state = db.Column(db.String(2), index=True, unique=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
