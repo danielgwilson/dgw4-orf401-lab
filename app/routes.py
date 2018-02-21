@@ -20,7 +20,7 @@ Material(app)
 def search_dat(file_name, search_term):
     # search the dataset for a query
 
-    df = pd.read_csv(file_name)
+    #df = pd.read_csv(file_name)
     # results = df[df['Address'].str.contains(search_term, case=False) |
     #           df['City'].str.contains(search_term, case=False) |
     #           df['State'].str.contains(search_term, case=False)].values.tolist()
