@@ -28,28 +28,44 @@
                     </div>
 
                     <div class="mdl-card__supporting-text">
-                        <h4>Hi, {{ current_user.username }}!</h4>
-                        <form class="search-form" action="/" method="get">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                {{ form.search(class="mdl-textfield__input", value=query) }}
-                                <label class="mdl-textfield__label">
-                                    Enter an origin city
-                                </label>
+                        {% if current_user.is_anonymous %}
+                            <h4>Hi there! To search for a ride, please login or create an account.</h4>
+                        {% else %}
+                            <h4>Hi, {{ current_user.username }}! Where would you like to be picked up?</h4>
+
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% endwith %}
+
+                            <form class="search-form" action="/" method="get">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    {{ form.search(class="mdl-textfield__input", value=query) }}
+                                    <label class="mdl-textfield__label">
+                                        Enter an origin city
+                                    </label>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    Search
+                                </button>
+                            </form>
+                            <br>
+                            {% if chips %}
+                            <div id="chips">
+                                {% for chip in chips %}
+                                <a href="/?search={{ chip }}">
+                                    <span class="mdl-chip">
+                                        <span class="mdl-chip__text">{{ chip }}</span>
+                                    </span>
+                                </a>
+                                {% endfor %}
                             </div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                                Search
-                            </button>
-                        </form>
-                        <br> {% if chips %}
-                        <div id="chips">
-                            {% for chip in chips %}
-                            <a href="/?search={{ chip }}">
-                                <span class="mdl-chip">
-                                    <span class="mdl-chip__text">{{ chip }}</span>
-                                </span>
-                            </a>
-                            {% endfor %}
-                        </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

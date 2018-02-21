@@ -30,7 +30,6 @@ def get_top_origins(file_name):
 
 
 @app.route('/')
-@login_required
 def index():
     data_file_name = 'app/met_gala_attendees.csv'
     form = SearchForm()
