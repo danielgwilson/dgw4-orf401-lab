@@ -133,3 +133,8 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', title='ORF 401: Lab 2 - Register', form=form)
+
+
+@app.route('/splash')
+def splash():
+    return render_template('splash.html', title='ORF 401: First Time Visitor')
